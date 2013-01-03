@@ -31,7 +31,30 @@ describe "Static Pages" do
           page.should have_selector("li##{item.id}", text: item.contents)
         end
       end
+
+      it "should have the correct microposts count and label" do
+        page.should have_content("2 microposts")
+      end
     end
+
+#   describe "micropost pagination" do
+
+#     let(:new_user) { FactoryGirl.create(:user, email: "foo@bar.com") }
+
+#     before do
+#       FactoryGirl.create(:micropost, contents: "Lorem ipsum")
+#       sign_in new_user
+#       visit root_path
+#     end
+  
+#     it { should have_selector('div.pagination') }
+
+#     it "should list each micropost" do
+#       new_user.feed.paginate(page: 1).each do |micropost|
+#         page.should have_selector("li##{micropost.id}", text: micropost.contents)
+#       end
+#     end
+#   end
   end
 
   describe "Help page" do
