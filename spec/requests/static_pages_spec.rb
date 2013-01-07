@@ -35,6 +35,17 @@ describe "Static Pages" do
       it "should have the correct microposts count and label" do
         page.should have_content("2 microposts")
       end
+
+      describe "follower/following counts" do
+        let(:other_user) { FactoryGirl.create(:user) }
+        before do
+          other_user.follow!(user)
+          visit root_path
+        end
+
+        it { should have_link("0 following", href: following_user_path(user)) }
+        it { should have_link("1 followers", href: followers_user_path(user)) }
+      end
     end
 
 #   describe "micropost pagination" do
